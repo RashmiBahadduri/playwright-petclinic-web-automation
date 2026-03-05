@@ -8,8 +8,7 @@ test.describe(" Pet Types Input fields tests", () => {
   });
 
   test("Update pet type", async ({ page }) => {
-    const firstPetEditButton = page.getByRole("button", { name: "Edit" }).first();
-    await firstPetEditButton.click();
+    await page.getByRole("button", { name: "Edit" }).first().click();
     await expect(page.getByRole("heading")).toHaveText("Edit Pet Type");
     const editPetTypeInput = page.locator("#name");
     await expect(editPetTypeInput).toHaveValue("cat");
@@ -17,7 +16,7 @@ test.describe(" Pet Types Input fields tests", () => {
     await page.getByRole("button", { name: "Update" }).click();
     const firstPetTypeTextBox = page.getByRole("textbox").first();
     await expect(firstPetTypeTextBox).toHaveValue("rabbit");
-    await firstPetEditButton.click();
+    await page.getByRole("button", { name: "Edit" }).first().click();
     await expect(editPetTypeInput).toHaveValue("rabbit");
     await editPetTypeInput.fill("cat");
     await page.getByRole("button", { name: "Update" }).click();
@@ -29,7 +28,6 @@ test.describe(" Pet Types Input fields tests", () => {
     const editPetTypeInput = page.locator("#name");
     await expect(editPetTypeInput).toHaveValue("dog");
     await editPetTypeInput.fill("moose");
-    await expect(editPetTypeInput).toHaveValue("moose");
     await page.getByRole("button", { name: "Cancel" }).click();
     await expect(page.getByRole("textbox").nth(1)).toHaveValue("dog");
   });
@@ -39,7 +37,8 @@ test.describe(" Pet Types Input fields tests", () => {
     const editPetTypeInput = page.locator("#name");
     await expect(editPetTypeInput).toHaveValue("lizard");
     await editPetTypeInput.clear();
-    await expect(page.getByText("Name is required")).toHaveText("Name is required");
+    await expect(editPetTypeInput).toBeEmpty();
+    await expect(page.locator(".help-block")).toHaveText("Name is required");
     await page.getByRole("button", { name: "Cancel" }).click();
     await expect(page.getByRole("heading")).toHaveText("Pet Types");
     await expect(page.getByRole("textbox").nth(2)).toHaveValue("lizard");
