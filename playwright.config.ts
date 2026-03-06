@@ -3,6 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 require('dotenv').config();
 
 export default defineConfig({
+  testDir: './tests',
   fullyParallel: false,
   retries: 0,
   workers: 1,
