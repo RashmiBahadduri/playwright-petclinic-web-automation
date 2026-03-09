@@ -13,22 +13,14 @@ test.describe("validate checkboxes", () => {
     const specialitiesDropdown = page.locator(".selected-specialties");
     await expect(specialitiesDropdown).toHaveText("radiology");
     await specialitiesDropdown.click();
-    await expect(
-      page.getByRole("checkbox", { name: "radiology" })
-    ).toBeChecked();
-    await expect(
-      page.getByRole("checkbox", { name: "surgery" })
-    ).not.toBeChecked();
-    await expect(
-      page.getByRole("checkbox", { name: "dentistry" })
-    ).not.toBeChecked();
+    await expect(page.getByRole("checkbox", { name: "radiology" })).toBeChecked();
+    await expect(page.getByRole("checkbox", { name: "surgery" })).not.toBeChecked();
+    await expect(page.getByRole("checkbox", { name: "dentistry" })).not.toBeChecked();
     await page.getByRole("checkbox", { name: "surgery" }).check();
     await page.getByRole("checkbox", { name: "radiology" }).uncheck();
     await expect(page.locator(".selected-specialties")).toHaveText("surgery");
     await page.getByRole("checkbox", { name: "dentistry" }).check();
-    await expect(page.locator(".selected-specialties")).toHaveText(
-      "surgery, dentistry"
-    );
+    await expect(page.locator(".selected-specialties")).toHaveText("surgery, dentistry");
   });
 
   test("Select all specialities", async ({ page }) => {
@@ -41,9 +33,7 @@ test.describe("validate checkboxes", () => {
       await box.check();
       await expect(box).toBeChecked();
     }
-    await expect(page.locator(".selected-specialties")).toHaveText(
-      "surgery, radiology, dentistry"
-    );
+    await expect(page.locator(".selected-specialties")).toHaveText("surgery, radiology, dentistry");
   });
 
   test("uncheck all specialities", async ({ page }) => {
