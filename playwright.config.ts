@@ -1,33 +1,33 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
-require('dotenv').config();
+require("dotenv").config();
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: "./tests",
   fullyParallel: false,
   retries: 0,
   workers: 1,
-  reporter: 'html',
-  globalSetup: '.auth/auth-setup.ts',
+  reporter: "html",
+  globalSetup: ".auth/auth-setup.ts",
   timeout: 90000,
   use: {
-    baseURL: 'https://petclinic.bondaracademy.com',
-    trace: 'on-first-retry',
-    storageState: '.auth/user.json',
+    baseURL: "https://petclinic.bondaracademy.com",
+    trace: "retain-on-failure",
+    screenshot: "only-on-failure",
+    storageState: ".auth/user.json",
     extraHTTPHeaders: {
-      'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`
+      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
     },
     actionTimeout: 10000,
-    viewport: {height: 1080, width: 1920}
+    viewport: { height: 1080, width: 1920 },
   },
 
   projects: [
     {
-      name: 'chromium',
-      use: { 
-        browserName: 'chromium'
+      name: "chromium",
+      use: {
+        browserName: "chromium",
       },
     },
   ],
-
 });
