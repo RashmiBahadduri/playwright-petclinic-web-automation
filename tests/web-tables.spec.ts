@@ -21,15 +21,14 @@ test.describe("Automate web tables", () => {
     const lastNames = ["Black", "Davis", "Es", "Playwright"];
     const lastNamSearchTextField = page.getByRole("textbox");
     const findOwnerButton = page.getByRole("button", { name: "Find Owner" });
-    const ownerNameColumn = page.locator("td.ownerFullName");
     for (const name of lastNames) {
+      const ownerNames = page.locator("td.ownerFullName");
       await lastNamSearchTextField.fill(name);
       await findOwnerButton.click();
-      if (name == "Black") {
-        await expect(ownerNameColumn.nth(0)).toContainText(name);
-      } else if (name == "Davis" || name == "Es") {
-        await expect(ownerNameColumn.nth(0)).toContainText(name);
-        await expect(ownerNameColumn.nth(1)).toContainText(name);
+      if (name == "Black" || name == "Davis" || name == "Es") {
+        for (const ownerName of await ownerNames.all()) {
+          await expect(ownerName).toContainText(name);
+        }
       } else {
         await expect(page.getByText(`No owners with LastName starting with "${name}"`)).toBeVisible();
       }
