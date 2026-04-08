@@ -25,7 +25,7 @@ test.describe("Automate web tables", () => {
       const ownerNames = page.locator("td.ownerFullName");
       await lastNamSearchTextField.fill(name);
       await findOwnerButton.click();
-      if (name == "Black" || name == "Davis" || name == "Es") {
+      if (name !== "Playwright") {
         for (const ownerName of await ownerNames.all()) {
           await expect(ownerName).toContainText(name);
         }
