@@ -42,47 +42,7 @@ test.describe("Automtae tests for datepicker", () => {
     expect(tomPetSection).not.toBeVisible();
   });
 
-  test("different approach for calendar date selection", async ({ page }) => {
-    await page.getByRole("link", { name: "Harold Davis" }).click();
-    await page.getByRole("button", { name: "Add New Pet" }).click();
-    await page.getByLabel("Name").fill("Tom");
-    await expect(page.locator(".glyphicon-ok")).toBeVisible();
-    await page.locator(".mat-datepicker-toggle").click();
-    let targetMonthYear = await page.locator(".mdc-button__label span").textContent();
-    console.log(`target: ${targetMonthYear}`);
-    const date = new Date();
-    date.setMonth(date.getMonth() + 1);
-    const expectedMonthName = date.toLocaleString("EN-us", { month: "long" });
-    const monthToSelect = date.getMonth();
-    const displayedMonth = monthToSelect + 1;
-    date.setFullYear(date.getFullYear() - 12);
-    const expectedYear = date.getFullYear();
-    date.setDate(date.getDate() - 13);
-    const expectedMonthYear = `0${displayedMonth} ${expectedYear}`;
-    if (!targetMonthYear?.includes(expectedMonthYear)) {
-      await page.locator(".mat-calendar-arrow").click();
-      let yearRows = await page.locator("button.mat-calendar-body-cell").locator("span").allTextContents();
-      while (!yearRows.includes(expectedYear.toString())) {
-        let year = await page.locator(".mdc-button__label span").textContent();
-        console.log(`year: ${year}`);
-        const minYear = year?.split(" ")[0];
-        if (expectedYear < parseInt(minYear!)) {
-          await page.getByRole("button", { name: "Previous 24 years" }).click();
-          yearRows = await page.locator("button.mat-calendar-body-cell").locator("span").allTextContents();
-        } else {
-          await page.getByRole("button", { name: "Next 24 years" }).click();
-          yearRows = await page.locator("button.mat-calendar-body-cell").locator("span").allTextContents();
-        }
-        year = await page.locator(".mdc-button__label span").textContent();
-      }
-    }
-    await page.getByText(`${expectedYear}, { exact: true }`).click();
-    await page.getByText(`${expectedMonthName} { exact: true }`).click();
-    await page.getByText("2", { exact: true }).click();
-    await expect(page.locator('[name="birthDate"]')).toHaveValue(`${expectedYear}/0${displayedMonth}/02`);
-  });
-
-  test.only("select the dates of visits and validate dates order", async ({ page }) => {
+  test("select the dates of visits and validate dates order", async ({ page }) => {
     await page.getByRole("link", { name: "Jean Coleman" }).click();
     const targetPetSection = page.locator("app-pet-list", { hasText: "Samantha" });
     await targetPetSection.getByRole("button", { name: "Add Visit" }).click();
@@ -99,7 +59,6 @@ test.describe("Automtae tests for datepicker", () => {
     await expect(page.locator('[name="date"]')).toHaveValue(expectedVisitDate);
     await page.locator("#description").fill("dermatologists visit");
     await page.getByRole("button", { name: "Add Visit" }).click();
-    ///const newVisitRow = targetPetSection.locator("app-visit-list tr").nth(1);
     const dermVisitRow = targetPetSection.locator("app-visit-list").getByRole("row", { name: "dermatologists visit" });
     await expect(dermVisitRow.locator("td").nth(0)).toHaveText(`${currentYear}-0${currentMonth}-${currentDate}`);
     await targetPetSection.getByRole("button", { name: "Add Visit" }).click();
@@ -124,13 +83,12 @@ test.describe("Automtae tests for datepicker", () => {
     const therapyDate = new Date(therapyVisitDate!);
     const therapyDateString = therapyDate.toISOString().split("T")[0];
     if (therapyDateString < dermDateString) {
-      //expect(targetPetSection.locator("app-visit-list").getByRole("row", { name: therapyVisitDate! }).nth(0).isVisible()).toBeTruthy();
-      expect(targetPetSection.locator("app-visit-list").locator("tr").nth(1)).toContainText(dermVisitDate!);
+      await expect(targetPetSection.locator("app-visit-list").locator("tr").nth(1)).toContainText(dermVisitDate!);
     }
     await targetPetSection.locator("app-visit-list").getByRole("row", { name: "massage therapy" }).getByRole("button", { name: "Delete Visit" }).click();
     await targetPetSection.locator("app-visit-list").getByRole("row", { name: "dermatologists visit" }).getByRole("button", { name: "Delete Visit" }).click();
     await page.waitForResponse("https://petclinic-api.bondaracademy.com/petclinic/api/visits/*");
-    expect(targetPetSection.locator("app-visit-list").getByRole("row", { name: "massage therapy" })).not.toBeVisible();
-    expect(targetPetSection.locator("app-visit-list").getByRole("row", { name: "dermatologists visit" })).not.toBeVisible();
+    await expect(targetPetSection.locator("app-visit-list").getByRole("row", { name: "massage therapy" })).not.toBeVisible();
+    await expect(targetPetSection.locator("app-visit-list").getByRole("row", { name: "dermatologists visit" })).not.toBeVisible();
   });
 });
