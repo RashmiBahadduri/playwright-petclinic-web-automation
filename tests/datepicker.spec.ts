@@ -14,18 +14,14 @@ test.describe("Automtae tests for datepicker", () => {
     await expect(page.locator(".glyphicon-ok")).toBeVisible();
     await page.locator(".mat-datepicker-toggle").click();
     let targetMonthYear = await page.locator(".mdc-button__label span").textContent();
-    console.log(`target: ${targetMonthYear}`);
     const date = new Date();
     date.setMonth(date.getMonth() + 1);
     const monthToSelect = date.getMonth();
     const displayedMonth = monthToSelect + 1;
     date.setFullYear(date.getFullYear() - 12);
     const expectedYear = date.getFullYear();
-    date.setDate(date.getDate() - 13);
-    const day = date.getDate().toString();
-    console.log(expectedYear);
+    const day = "2";
     const expectedMonthYear = `0${displayedMonth} ${expectedYear}`;
-    console.log(`expected: ${expectedMonthYear}`);
     while (!targetMonthYear?.includes(expectedMonthYear)) {
       await page.getByRole("button", { name: "Previous month" }).click();
       targetMonthYear = await page.locator(".mdc-button__label span").textContent();
@@ -39,7 +35,7 @@ test.describe("Automtae tests for datepicker", () => {
     await expect(tomPetSection.locator("dd").nth(0)).toHaveText("Tom");
     await expect(tomPetSection.locator("dd").nth(1)).toHaveText(`${expectedYear}-0${displayedMonth}-0${day}`);
     await tomPetSection.getByRole("button", { name: "Delete Pet" }).click();
-    expect(tomPetSection).not.toBeVisible();
+    await expect(tomPetSection).not.toBeVisible();
   });
 
   test("select the dates of visits and validate dates order", async ({ page }) => {
