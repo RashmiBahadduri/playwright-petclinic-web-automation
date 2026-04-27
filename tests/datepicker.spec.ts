@@ -39,9 +39,7 @@ test.describe("Automtae tests for datepicker", () => {
     await expect(page.locator("tr").locator("td").nth(3)).toHaveText("Jean Coleman");
     await page.getByRole("button", { name: "Open calendar" }).click();
     const date = new Date();
-    const currentDay = date.getDate();
     const currentDate = date.toLocaleString("en-US", { day: "2-digit" });
-    const month = date.getMonth() + 1;
     const currentMonth = date.toLocaleString("en-US", { month: "2-digit" });
     const currentYear = date.getFullYear().toString();
     const expectedVisitDate = `${currentYear}/${currentMonth}/${currentDate}`;
@@ -55,7 +53,6 @@ test.describe("Automtae tests for datepicker", () => {
     await page.getByRole("button", { name: "Open calendar" }).click();
     date.setDate(date.getDate() - 45);
     const newDate = date.getDate().toString();
-    const expectedMonth = date.getMonth() + 1;
     const massageTherapyMonth = date.toLocaleString("en-US", { month: "2-digit" });
     const expectedYear = date.getFullYear().toString();
     const expectedMonthYear = `${massageTherapyMonth} ${expectedYear}`;
@@ -68,7 +65,9 @@ test.describe("Automtae tests for datepicker", () => {
     await page.locator("#description").fill("massage therapy");
     await page.getByRole("button", { name: "Add Visit" }).click();
     const dermatologistVisitDate = await samanthaPetSection.locator("app-visit-list").getByRole("row", { name: "dermatologists visit" }).locator("td").nth(0).textContent();
+    const massageTherapyVisitDate = await samanthaPetSection.locator("app-visit-list").getByRole("row", { name: "massage therapy" }).locator("td").nth(0).textContent();
     await expect(samanthaPetSection.locator("app-visit-list").locator("tr").nth(1)).toContainText(dermatologistVisitDate!);
+    await expect(samanthaPetSection.locator("app-visit-list").locator("tr").nth(2)).toContainText(massageTherapyVisitDate!);
     await samanthaPetSection.locator("app-visit-list").getByRole("row", { name: "massage therapy" }).getByRole("button", { name: "Delete Visit" }).click();
     await samanthaPetSection.locator("app-visit-list").getByRole("row", { name: "dermatologists visit" }).getByRole("button", { name: "Delete Visit" }).click();
     await page.waitForResponse("https://petclinic-api.bondaracademy.com/petclinic/api/visits/*");
