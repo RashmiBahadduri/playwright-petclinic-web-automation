@@ -30,7 +30,7 @@ test.describe("Automtae tests for datepicker", () => {
     await expect(tomPetSection).not.toBeVisible();
   });
 
-  test.only("select the dates of visits and validate dates order", async ({ page }) => {
+  test("select the dates of visits and validate dates order", async ({ page }) => {
     await page.getByRole("link", { name: "Jean Coleman" }).click();
     const samanthaPetSection = page.locator("app-pet-list", { hasText: "Samantha" });
     await samanthaPetSection.getByRole("button", { name: "Add Visit" }).click();
