@@ -3,7 +3,7 @@ import ownerData from "../test-data/owners.json";
 import jessData from "../test-data/ownerJess.json";
 
 test.beforeEach(async ({ page }) => {
-  await page.route("https://petclinic-api.bondaracademy.com/petclinic/api/owners", async (route) => {
+  await page.route("*/**/api/owners", async (route) => {
     await route.fulfill({
       body: JSON.stringify(ownerData),
     });
@@ -22,7 +22,7 @@ test("validate owners list and visit list count", async ({ page }) => {
   const ownerFirstPet = await targetOwnerRow.locator("td").last().locator("tr").first().textContent();
   const ownerSecondPet = await targetOwnerRow.locator("td").last().locator("tr").last().textContent();
   await expect(page.locator("td.ownerFullName")).toHaveCount(2);
-  await page.route("https://petclinic-api.bondaracademy.com/petclinic/api/owners/*", async (route) => {
+  await page.route("*/**/api/owners/*", async (route) => {
     await route.fulfill({
       body: JSON.stringify(jessData),
     });
@@ -37,5 +37,6 @@ test("validate owners list and visit list count", async ({ page }) => {
   const lunaPetSection = page.locator("app-pet-list", { hasText: "Luna" });
   await expect(lunaPetSection.getByRole("row", { name: "Name" })).toContainText(ownerFirstPet!);
 
-  await expect(lunaPetSection.locator("app-visit-list").locator("tr")).toHaveCount(10 + 1);
+  await expect(lunaPetSection.locator("app-visit-list tbody tr")).toHaveCount(10);
+  //await expect(lunaPetSection.locator("app-visit-list tr").filter({ hasNotText: "Visit Date" })).toHaveCount(10);
 });
