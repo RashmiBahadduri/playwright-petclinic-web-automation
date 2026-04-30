@@ -36,7 +36,5 @@ test("validate owners list and visit list count", async ({ page }) => {
   await expect(page.locator("app-pet-list").getByRole("row", { name: "Name" }).nth(1)).toContainText(ownerSecondPet!);
   const lunaPetSection = page.locator("app-pet-list", { hasText: "Luna" });
   await expect(lunaPetSection.getByRole("row", { name: "Name" })).toContainText(ownerFirstPet!);
-
-  await expect(lunaPetSection.locator("app-visit-list tbody tr")).toHaveCount(10);
-  //await expect(lunaPetSection.locator("app-visit-list tr").filter({ hasNotText: "Visit Date" })).toHaveCount(10);
+  await expect(lunaPetSection.locator("app-visit-list table > tr")).toHaveCount(10);
 });
