@@ -1,0 +1,161 @@
+[
+  {
+    "firstName": "Jess",
+    "lastName": "Walt",
+    "address": "10 State st",
+    "city": "Boston",
+    "telephone": "6085551121",
+    "id": 1212,
+    "pets": [
+      {
+        "name": "Luna",
+        "birthDate": "2000-05-07",
+        "type": {
+          "name": "dog",
+          "id": 2111
+        },
+        "id": 4188,
+        "ownerId": 1212,
+        "visits": [
+          {
+            "date": "2025-02-04",
+            "description": "spayed",
+            "id": 5570,
+            "petId": null
+          },
+          {
+            "date": "2024-12-03",
+            "description": "vaccination",
+            "id": 5571,
+            "petId": null
+          },
+          {
+            "date": "2024-06-12",
+            "description": "massage therapy",
+            "id": 5572,
+            "petId": null
+          },
+          {
+            "date": "2024-03-20",
+            "description": "rabies shot",
+            "id": 5573,
+            "petId": null
+          },
+          {
+            "date": "2023-11-04",
+            "description": "dental appointment",
+            "id": 5574,
+            "petId": null
+          },
+          {
+            "date": "2023-07-10",
+            "description": "regular visit",
+            "id": 5575,
+            "petId": null
+          },
+          {
+            "date": "2023-04-16",
+            "description": "dermatologist visit",
+            "id": 5576,
+            "petId": null
+          },
+          {
+            "date": "2022-10-10",
+            "description": "pre surgery visit",
+            "id": 5577,
+            "petId": null
+          },
+          {
+            "date": "2022-06-04",
+            "description": "tik check",
+            "id": 5578,
+            "petId": null
+          },
+          {
+            "date": "2022-01-30",
+            "description": "routine visit",
+            "id": 5579,
+            "petId": null
+          }
+        ]
+      },
+      {
+        "name": "Bella",
+        "birthDate": "2002-05-07",
+        "type": {
+          "name": "cat",
+          "id": 2211
+        },
+        "id": 4198,
+        "ownerId": 1212,
+        "visits": []
+      }
+    ]
+  },
+
+  {
+    "firstName": "Erika",
+    "lastName": "Lopez",
+    "address": "26 Park St.",
+    "city": "Waltham",
+    "telephone": "6085558777",
+    "id": 2331,
+    "pets": [
+      {
+        "name": "Baley",
+        "birthDate": "2004-03-07",
+        "type": {
+          "name": "dog",
+          "id": 2665
+        },
+        "id": 4183,
+        "ownerId": 2331,
+        "visits": []
+      },
+      {
+        "name": "Charlie",
+        "birthDate": "2002-04-17",
+        "type": {
+          "name": "dog",
+          "id": 2613
+        },
+        "id": 4171,
+        "ownerId": 2331,
+        "visits": []
+      },
+      {
+        "name": "Susie",
+        "birthDate": "2010-05-17",
+        "type": {
+          "name": "cat",
+          "id": 2616
+        },
+        "id": 4161,
+        "ownerId": 2331,
+        "visits": []
+      },
+      {
+        "name": "Brenda",
+        "birthDate": "2011-12-17",
+        "type": {
+          "name": "bird",
+          "id": 2615
+        },
+        "id": 4110,
+        "ownerId": 2331,
+        "visits": []
+      },
+      {
+        "name": "Lucy",
+        "birthDate": "2022-11-17",
+        "type": {
+          "name": "cat",
+          "id": 2618
+        },
+        "id": 4166,
+        "ownerId": 2331,
+        "visits": []
+      }
+    ]
+  }
+]
