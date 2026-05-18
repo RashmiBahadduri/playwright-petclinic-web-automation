@@ -1,0 +1,103 @@
+[
+  {
+    "firstName": "James",
+    "lastName": "Carter",
+    "specialties": [],
+    "id": 3034
+  },
+  {
+    "firstName": "Helen",
+    "lastName": "Leary",
+    "specialties": [
+      {
+        "id": 4631,
+        "name": "radiology"
+      }
+    ],
+    "id": 3035
+  },
+  {
+    "firstName": "Linda",
+    "lastName": "Douglas",
+    "specialties": [
+      {
+        "id": 4633,
+        "name": "dentistry"
+      },
+      {
+        "id": 4632,
+        "name": "surgery"
+      }
+    ],
+    "id": 3036
+  },
+  {
+    "firstName": "Rafael",
+    "lastName": "Ortega",
+    "specialties": [
+      {
+        "id": 4632,
+        "name": "surgery"
+      }
+    ],
+    "id": 3037
+  },
+  {
+    "firstName": "Henry",
+    "lastName": "Stevens",
+    "specialties": [
+      {
+        "id": 4631,
+        "name": "radiology"
+      }
+    ],
+    "id": 3038
+  },
+  {
+    "firstName": "Sharon",
+    "lastName": "Jenkins",
+    "specialties": [
+      {
+        "id": 4633,
+        "name": "dentistry"
+      },
+      {
+        "id": 4632,
+        "name": "surgery"
+      },
+      {
+        "id": 4631,
+        "name": "radiology"
+      },
+      {
+        "id": 4634,
+        "name": "massage therapy"
+      },
+      {
+        "id": 4635,
+        "name": "dermatology"
+      },
+      {
+        "id": 4636,
+        "name": "vaccination"
+      },
+      {
+        "id": 4637,
+        "name": "pre surgery"
+      },
+      {
+        "id": 4638,
+        "name": "post surgery"
+      },
+      {
+        "id": 4639,
+        "name": "emergency care"
+      },
+      {
+        "id": 4640,
+        "name": "dental care"
+      }
+    ],
+    "id": 3039
+  }
+]
