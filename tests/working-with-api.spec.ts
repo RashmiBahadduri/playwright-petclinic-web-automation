@@ -12,7 +12,8 @@ test.beforeEach(async ({ page }) => {
   await page.route("*/**/api/vets", async (route) => {
     const response = await route.fetch();
     const responsebody = await response.json();
-    ((responsebody[5].specialties = [
+    const targetVet = responsebody.find((vet) => vet.firstName === "Sharon" && vet.lastName === "Jenkins");
+    ((targetVet.specialties = [
       {
         id: 4633,
         name: "dentistry",
